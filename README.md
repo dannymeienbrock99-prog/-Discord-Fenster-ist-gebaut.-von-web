@@ -8,12 +8,20 @@ The original ROG mouse photo is **not stored in this repository**. The page refe
 
 ## Files
 
-- `index.html`, `styles.css`, `app.mjs`, `discord-data.mjs`: static application source.
+- `index.html`, `styles.css`, `app.mjs`, `discord-data.mjs`: Discord Lounge application source.
+- `music-player.mjs`: browser based audio player with playlist, playback controls and drag-and-drop uploads.
 - `ASSET_PROVENANCE.md`: image source and transfer limitation.
 - No build step is required.
+
+## Music player
+
+The player accepts common audio files (including MP3) up to 80 MB each. Files and the playlist are saved in the visitor's browser with IndexedDB. A filename in the form `Artist - Title.mp3` fills in the artist and title automatically. Playback, seek, volume, shuffle, repeat and removing a title work in the browser.
+
+This static version does not upload files to a shared online library. Each visitor sees only the files saved in their own browser. To let a friend upload songs that every visitor can hear, connect an online file store and configure its upload permissions. The original ROG mouse photo is not used as the music player's background.
 
 ## Behavior
 
 The application uses Discord's public widget endpoint for the configured server, with visible loading and error states. It does not invent member data. It includes channel/member tabs, refresh, appearance settings stored in the browser, responsive layout and access to the original Discord widget.
 
 Open `index.html` from a static web host. The browser must be able to reach Discord's public widget endpoint for live data.
+
