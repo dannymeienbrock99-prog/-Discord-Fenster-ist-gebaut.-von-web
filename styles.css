@@ -1108,6 +1108,210 @@ body[data-embed] .lounge {
     padding-left: 11px;
   }
   .channel-name {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 820px) {
+  .brand-subtitle,
+  .brand-divider {
+    display: none;
+  }
+
+  .intro {
+    width: 88%;
+  }
+
+  .intro h1 {
+    max-width: 560px;
+  }
+
+  .community-panel {
+    width: 73%;
+  }
+
+  .background-shade {
+    background:
+      linear-gradient(90deg, #0b0e10 0%, rgba(11, 14, 16, 0.96) 24%, rgba(11, 14, 16, 0.73) 44%, rgba(11, 14, 16, 0.09) 89%),
+      linear-gradient(180deg, rgba(0, 0, 0, 0.02), transparent 55%, rgba(0, 0, 0, 0.24));
+  }
+}
+
+@media (max-width: 680px) {
+  .app-stage {
+    padding: 14px;
+  }
+
+  .lounge {
+    min-height: calc(100svh - 28px);
+    border-radius: 15px;
+  }
+
+  .background-photo {
+    height: 565px;
+    object-position: var(--photo-x) top;
+  }
+
+  .background-shade {
+    background:
+      linear-gradient(180deg, rgba(11, 14, 16, 0.04) 0, rgba(11, 14, 16, 0.16) 270px, rgba(11, 14, 16, 0.82) 440px, #0b0e10 590px),
+      linear-gradient(90deg, rgba(11, 14, 16, 0.96), rgba(11, 14, 16, 0.68) 43%, rgba(11, 14, 16, 0.07) 96%);
+  }
+
+  .window-header {
+    min-height: 67px;
+    gap: 14px;
+    padding: 15px 18px;
+  }
+
+  .brand {
+    gap: 10px;
+  }
+
+  .brand-name {
+    font-size: 22px;
+  }
+
+  .discord-mark {
+    width: 30px;
+    height: 25px;
+  }
+
+  .window-actions {
+    gap: 7px;
+  }
+
+  #customizeButton,
+  #expandButton {
+    width: 35px;
+    min-height: 35px;
+    height: 35px;
+    padding: 8px;
+    border-radius: 7px;
+  }
+
+  #customizeButton {
+    gap: 0;
+    font-size: 0;
+  }
+
+  #customizeButton svg,
+  #expandButton svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .content {
+    gap: 26px;
+    padding: 29px 18px 22px;
+  }
+
+  .intro {
+    width: 100%;
+    padding: 0;
+  }
+
+  .intro h1 {
+    max-width: 340px;
+    font-size: clamp(29px, 7vw, 38px);
+    letter-spacing: -0.04em;
+    line-height: 1.11;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .lead {
+    max-width: 295px;
+    margin-top: 12px;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .connection-summary {
+    gap: 8px;
+    margin-top: 19px;
+    font-size: 12px;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .intro .primary-button {
+    width: 265px;
+    min-height: 48px;
+    margin-top: 18px;
+    padding: 12px 17px;
+    font-size: 14px;
+  }
+
+  .community-panel {
+    width: 100%;
+    max-width: none;
+    padding: 8px 12px 12px;
+    border-color: rgba(var(--accent-rgb), 0.46);
+    background: rgba(16, 19, 20, var(--glass-opacity));
+  }
+
+  .panel-tabs {
+    gap: 5px;
+    margin-bottom: 11px;
+  }
+
+  .tab {
+    min-height: 45px;
+    gap: 6px;
+    padding: 9px 6px 12px;
+    font-size: 13px;
+  }
+
+  .tab > svg,
+  .tab > span > svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .tab-count {
+    min-width: 18px;
+    padding: 3px 4px;
+    font-size: 9px;
+  }
+
+  .panel-tabs > .icon-button {
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+  }
+
+  .panel-tabs > .icon-button svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .panel-content {
+    min-height: 280px;
+    max-height: 375px;
+  }
+
+  .channel-row {
+    min-height: 44px;
+    gap: 9px;
+    padding: 9px 10px;
+    border-radius: 7px;
+  }
+
+  .channel-icon {
+    flex-basis: 27px;
+    width: 27px;
+    padding-right: 8px;
+  }
+
+  .channel-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .channel-name {
     font-size: 12px;
   }
 
