@@ -782,6 +782,17 @@ input:focus-visible {
 .upload-button { display:inline-flex; flex-shrink:0; min-height:43px; align-items:center; justify-content:center; gap:9px; padding:10px 15px; border:1px solid rgba(var(--accent-rgb),.62); border-radius:9px; background:linear-gradient(135deg,rgba(var(--accent-rgb),.2),rgba(var(--accent-rgb),.08)); color:#f9e9c3; font-size:12px; font-weight:700; cursor:pointer; transition:background .16s,border-color .16s,transform .16s; }
 .upload-button:hover { transform:translateY(-1px); border-color:var(--accent); background:rgba(var(--accent-rgb),.22); }
 .upload-button span { font-size:18px; line-height:1; }
+.music-auth { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto; align-items:end; gap:11px; margin:0 0 17px; padding:13px; border:1px solid rgba(255,255,255,.09); border-radius:10px; background:rgba(3,8,11,.46); }
+.music-auth label { display:grid; gap:6px; color:#a8b0b2; font-size:10px; letter-spacing:.08em; text-transform:uppercase; }
+.music-auth input { width:100%; min-width:0; min-height:38px; padding:9px 11px; border:1px solid rgba(255,255,255,.15); border-radius:7px; outline:none; background:rgba(255,255,255,.04); color:#f5f2e8; font-size:12px; letter-spacing:normal; text-transform:none; }
+.music-auth input:focus { border-color:var(--accent); }
+.auth-actions { display:flex; flex-wrap:wrap; gap:7px; }
+.auth-actions button { min-height:38px; padding:8px 12px; border:1px solid rgba(var(--accent-rgb),.5); border-radius:7px; background:rgba(var(--accent-rgb),.12); color:#f4e4be; font-size:11px; font-weight:700; }
+.auth-actions button:hover { background:rgba(var(--accent-rgb),.22); }
+.auth-actions .auth-signup,.auth-actions .auth-signout { border-color:rgba(255,255,255,.13); background:transparent; color:#d3d6d4; }
+.auth-user { grid-column:1 / 3; color:#efe1bd; font-size:11px; }
+.auth-status { grid-column:1 / -1; margin:0; color:#9aa5a8; font-size:10px; line-height:1.5; }
+.auth-actions button[hidden],.upload-button[hidden],.music-auth[hidden] { display:none; }
 .music-layout { display:grid; grid-template-columns:minmax(280px, .92fr) minmax(0,1.45fr); min-height:340px; overflow:hidden; border:1px solid rgba(255,255,255,.075); border-radius:12px; background:rgba(5,9,12,.58); }
 .track-panel { min-width:0; padding:15px 14px; border-right:1px solid rgba(255,255,255,.08); }
 .track-panel-heading { display:flex; justify-content:space-between; gap:12px; padding:2px 5px 11px; color:#d8d5ca; font-size:10px; font-weight:750; letter-spacing:.13em; }
@@ -789,7 +800,7 @@ input:focus-visible {
 .track-list { display:flex; max-height:306px; flex-direction:column; gap:4px; overflow:auto; }
 .track-list.is-drop-target { outline:2px dashed var(--accent); outline-offset:-4px; border-radius:9px; }
 .track-empty { display:grid; min-height:115px; place-items:center; padding:20px; color:#8d979d; font-size:12px; text-align:center; }
-.track-row { display:grid; grid-template-columns:25px 29px minmax(0,1fr) 25px; min-height:53px; align-items:center; gap:8px; padding:5px 7px; border:1px solid transparent; border-radius:8px; transition:background .15s,border-color .15s; }
+.track-row { display:grid; grid-template-columns:25px 29px minmax(0,1fr) auto; min-height:53px; align-items:center; gap:8px; padding:5px 7px; border:1px solid transparent; border-radius:8px; transition:background .15s,border-color .15s; }
 .track-row:hover { background:rgba(255,255,255,.045); }
 .track-row.is-active { border-color:rgba(var(--accent-rgb),.75); background:linear-gradient(95deg,rgba(var(--accent-rgb),.18),rgba(var(--accent-rgb),.06)); box-shadow:0 0 16px rgba(var(--accent-rgb),.08); }
 .track-number { color:#89949a; font-size:11px; font-variant-numeric:tabular-nums; text-align:center; }
@@ -1417,6 +1428,9 @@ body[data-embed] .lounge {
 
 @media (max-width: 760px) {
   .music-room { margin: 0 18px 18px; padding: 16px; }
+  .music-auth { grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+  .auth-actions { grid-column:1 / -1; }
+  .auth-user { grid-column:1 / -1; }
   .music-layout { grid-template-columns: 1fr; }
   .track-panel { border-right:0; border-bottom:1px solid rgba(255,255,255,.08); }
   .track-list { max-height:250px; }
@@ -1425,6 +1439,9 @@ body[data-embed] .lounge {
 
 @media (max-width: 520px) {
   .music-room { margin:0 12px 14px; padding:13px; }
+  .music-auth { grid-template-columns:1fr; }
+  .music-auth label,.auth-actions,.auth-user,.auth-status { grid-column:1; }
+  .auth-actions button { flex:1; }
   .music-heading { align-items:flex-start; flex-direction:column; gap:13px; }
   .upload-button { width:100%; }
   .music-subtitle { font-size:12px; }
