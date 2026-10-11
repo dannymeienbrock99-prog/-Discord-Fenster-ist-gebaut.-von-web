@@ -4,7 +4,7 @@ const $ = (id) => document.getElementById(id);
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const CHANNELS_URL = `https://discord.com/channels/${GUILD_ID}`;
 const SETTINGS_KEY = 'crazy-batto-discord-style-v1';
-const DEFAULT_STYLE = { brightness: 92, glass: 62, position: 100, accent: '#e2bf79' };
+const DEFAULT_STYLE = { accent: '#e2bf79' };
 const STATUS_LABELS = { online: 'Online', idle: 'Abwesend', dnd: 'Nicht stören', offline: 'Offline' };
 const state = { data: null, activeTab: 'channels', lastSuccess: null, busy: false, controller: null, timer: null, consecutiveErrors: 0 };
 let style = { ...DEFAULT_STYLE };
@@ -229,9 +229,6 @@ function clamp(value, minimum, maximum, fallback) {
 
 function normalizeStyle(raw) {
   return {
-    brightness: clamp(raw?.brightness, 35, 115, DEFAULT_STYLE.brightness),
-    glass: clamp(raw?.glass, 30, 94, DEFAULT_STYLE.glass),
-    position: clamp(raw?.position, 0, 100, DEFAULT_STYLE.position),
     accent: typeof raw?.accent === 'string' && /^#[0-9a-f]{6}$/i.test(raw.accent) ? raw.accent.toLowerCase() : DEFAULT_STYLE.accent
   };
 }
@@ -245,15 +242,6 @@ function applyStyle(persist = true) {
   vars.setProperty('--accent-rgb', rgb.join(', '));
   vars.setProperty('--accent-contrast', luminance > 0.179 ? '#101111' : '#ffffff');
   vars.setProperty('--accent-highlight', luminance > 0.179 ? '#ffffff' : '#000000');
-  vars.setProperty('--photo-brightness', String(style.brightness / 100));
-  vars.setProperty('--glass-opacity', String(style.glass / 100));
-  vars.setProperty('--photo-x', style.position + '%');
-  $('photoBrightness').value = style.brightness;
-  $('brightnessValue').value = `${style.brightness} %`;
-  $('glassStrength').value = style.glass;
-  $('glassValue').value = `${style.glass} %`;
-  $('photoPosition').value = style.position;
-  $('positionValue').value = `${style.position} %`;
   $('accentColor').value = style.accent;
   $('accentValue').value = style.accent.toUpperCase();
   document.querySelectorAll('[data-color]').forEach((button) => {
@@ -292,8 +280,6 @@ function configureUI() {
     const bounds = dialog.getBoundingClientRect();
     if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
   }));
-  const controls = [['photoBrightness', 'brightness'], ['glassStrength', 'glass'], ['photoPosition', 'position']];
-  for (const [id, key] of controls) $(id).addEventListener('input', () => { style[key] = Number($(id).value); applyStyle(); });
   $('accentColor').addEventListener('input', () => { style.accent = $('accentColor').value; applyStyle(); });
   document.querySelectorAll('[data-color]').forEach((button) => button.addEventListener('click', () => { style.accent = button.dataset.color; applyStyle(); }));
   $('resetStyle').addEventListener('click', () => { style = { ...DEFAULT_STYLE }; applyStyle(); notify('Gold-Design wiederhergestellt.'); });
@@ -330,3 +316,4 @@ window.addEventListener('pageshow', (event) => { if (event.persisted) refresh(fa
 window.addEventListener('online', () => refresh(false));
 configureUI();
 refresh(false);
+
