@@ -7,8 +7,8 @@
   <meta name="description" content="Crazy_Batto Discord Lounge – gemeinsam zocken und zusammen abhängen. Mit öffentlichen Sprachkanälen und Online-Mitgliedern.">
   <title>Crazy_Batto · Discord Lounge</title>
   <link rel="stylesheet" href="./styles.css">
-  <link rel="preload" href="https://crazy-batto-discord-lounge.fine-trail-0499.chatgpt.site/assets/rog-anniversary-background.png" as="image">
   <script type="module" src="./app.mjs"></script>
+  <script type="module" src="./music-player.mjs"></script>
 </head>
 <body>
   <svg xmlns="http://www.w3.org/2000/svg" class="svg-symbols" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
@@ -26,7 +26,6 @@
 
   <div class="app-stage">
     <main class="lounge" id="lounge" aria-label="Crazy_Batto Discord Lounge">
-      <img class="background-photo" src="https://crazy-batto-discord-lounge.fine-trail-0499.chatgpt.site/assets/rog-anniversary-background.png" alt="" aria-hidden="true" fetchpriority="high">
       <div class="background-shade" aria-hidden="true"></div>
 
       <header class="window-header">
@@ -63,6 +62,29 @@
         </section>
       </section>
 
+      <section class="music-room" aria-labelledby="musicTitle">
+        <div class="music-heading">
+          <div><p class="music-eyebrow">CRAZY_BATTO · MUSIC</p><h2 id="musicTitle">Eure Musik. Eure Lounge.</h2><p class="music-subtitle">Legt eigene Tracks in die Playlist und hört direkt im Browser.</p></div>
+          <label class="upload-button" for="musicFiles"><span aria-hidden="true">＋</span> Lieder hinzufügen</label>
+          <input class="visually-hidden" id="musicFiles" type="file" accept="audio/*,.mp3,.m4a,.ogg,.wav" multiple>
+        </div>
+        <div class="music-layout">
+          <div class="track-panel">
+            <div class="track-panel-heading"><span>PLAYLIST</span><span id="trackCount">0 Titel</span></div>
+            <div class="track-list" id="trackList" aria-live="polite"><div class="track-empty">Fügt eure ersten Lieder hinzu.</div></div>
+          </div>
+          <div class="now-playing">
+            <div class="album-art" id="albumArt" aria-hidden="true"><span class="art-orbit orbit-one"></span><span class="art-orbit orbit-two"></span><span class="art-center">CB</span><div class="art-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+            <p class="now-label">LÄUFT GERADE</p><h3 id="nowTitle">Noch kein Titel ausgewählt</h3><p id="nowArtist">Eure Playlist wartet auf Musik</p>
+            <audio id="audioPlayer" preload="metadata"></audio>
+            <div class="audio-progress"><span id="elapsedTime">0:00</span><input id="seekBar" type="range" min="0" max="1000" value="0" aria-label="Wiedergabeposition"><span id="durationTime">0:00</span></div>
+            <div class="player-controls"><button id="shuffleButton" class="player-utility" type="button" aria-label="Zufallswiedergabe" aria-pressed="false" title="Zufallswiedergabe">⤨</button><button id="previousTrack" type="button" aria-label="Vorheriger Titel">|◀</button><button id="playToggle" class="play-toggle" type="button" aria-label="Abspielen">▶</button><button id="nextTrack" type="button" aria-label="Nächster Titel">▶|</button><button id="repeatButton" class="player-utility" type="button" aria-label="Wiederholen" aria-pressed="false" title="Wiederholen">↻</button></div>
+            <label class="volume-control">LAUTSTÄRKE<input id="volumeBar" type="range" min="0" max="1" step="0.01" value="0.78" aria-label="Lautstärke"></label>
+          </div>
+        </div>
+        <p class="storage-note" id="storageNote">Uploads bleiben in diesem Browser gespeichert. Für eine gemeinsame Playlist für alle Besucher braucht die Website noch einen Online-Speicher.</p>
+      </section>
+
       <footer class="window-footer">
         <span id="connectionStatus" role="status"><span class="status-dot" data-status="loading" aria-hidden="true"></span><span id="connectionText">Wird mit Discord verbunden …</span></span>
         <button class="link-button" id="originalWidgetButton" type="button" aria-haspopup="dialog" aria-controls="originalDialog"><svg aria-hidden="true"><use href="#icon-external"></use></svg><span>Original-Widget</span></button>
@@ -73,12 +95,6 @@
   <dialog id="settingsDialog" class="settings-dialog" aria-labelledby="settingsTitle">
     <div class="dialog-header"><h2 id="settingsTitle">Dein Fenster. Dein Stil.</h2><button type="button" class="icon-button" data-close="settingsDialog" aria-label="Anpassungen schließen"><svg aria-hidden="true"><use href="#icon-close"></use></svg></button></div>
     <form class="settings-form" id="settingsForm" method="dialog">
-      <div class="setting-row"><label for="photoBrightness">Bildhelligkeit</label><output for="photoBrightness" id="brightnessValue">92 %</output></div>
-      <input type="range" id="photoBrightness" name="brightness" min="35" max="115" step="1" value="92">
-      <div class="setting-row"><label for="glassStrength">Glasstärke</label><output for="glassStrength" id="glassValue">62 %</output></div>
-      <input type="range" id="glassStrength" name="glass" min="30" max="94" step="1" value="62">
-      <div class="setting-row"><label for="photoPosition">Bildposition</label><output for="photoPosition" id="positionValue">100 %</output></div>
-      <input type="range" id="photoPosition" name="position" min="0" max="100" step="1" value="100">
       <div class="setting-row"><label for="accentColor">Akzentfarbe</label><output for="accentColor" id="accentValue">#E2BF79</output></div>
       <div class="accent-options" role="group" aria-label="Akzentfarbe auswählen">
         <button class="color-swatch" type="button" data-color="#e2bf79" data-selected="true" style="--swatch:#e2bf79" aria-label="Gold" aria-pressed="true"></button>
@@ -102,3 +118,4 @@
   <noscript><p class="noscript-note">Aktiviere JavaScript für die Live-Ansicht. <a href="https://discord.com/widget?id=1352052994576748709&amp;theme=dark">Original-Widget öffnen</a></p></noscript>
 </body>
 </html>
+
