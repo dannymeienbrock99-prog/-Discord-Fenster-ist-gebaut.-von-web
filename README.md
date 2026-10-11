@@ -1,27 +1,26 @@
 # Crazy_Batto · Discord Lounge
 
-## Transfer status
-
-This repository is a **clearly labeled reconstruction** from the original project outputs retained in the referenced conversation. The HTML, app logic and Discord data module were recovered from those outputs; the stylesheet's final section was reconstructed where the retained output ended mid-rule. This is not claimed as a byte-for-byte source export.
-
-The original ROG mouse photo is **not stored in this repository**. The page references the existing Sites-hosted image at [the original asset](https://crazy-batto-discord-lounge.fine-trail-0499.chatgpt.site/assets/rog-anniversary-background.png). That URL may require access to the original private Site, so a public GitHub Pages deployment may not display the photo. The original file could not be exported from the previous environment here.
-
-## Files
-
-- `index.html`, `styles.css`, `app.mjs`, `discord-data.mjs`: Discord Lounge application source.
-- `music-player.mjs`: browser based audio player with playlist, playback controls and drag-and-drop uploads.
-- `ASSET_PROVENANCE.md`: image source and transfer limitation.
-- No build step is required.
+This is a clearly labeled reconstruction from the project outputs retained in the referenced conversation. It is not a byte-for-byte export. The mouse background image is not used; the music player draws its artwork in CSS.
 
 ## Music player
 
-The player accepts common audio files (including MP3) up to 80 MB each. Files and the playlist are saved in the visitor's browser with IndexedDB. A filename in the form `Artist - Title.mp3` fills in the artist and title automatically. Playback, seek, volume, shuffle, repeat and removing a title work in the browser.
+The player accepts audio files up to 80 MB, supports playback, seeking, volume, shuffle, repeat and drag-and-drop. With no cloud settings, tracks are stored only in the current browser using IndexedDB.
 
-This static version does not upload files to a shared online library. Each visitor sees only the files saved in their own browser. To let a friend upload songs that every visitor can hear, connect an online file store and configure its upload permissions. The original ROG mouse photo is not used as the music player's background.
+To enable the shared, login-protected playlist:
 
-## Behavior
+1. Create a Supabase project and run [`supabase/music-schema.sql`](supabase/music-schema.sql) in its SQL Editor after replacing `you@example.com` and `friend@example.com` with the two lowercase account emails. Keep the real addresses in Supabase; do not commit them to this public repository.
+2. In [`music-cloud-config.mjs`](music-cloud-config.mjs), set the project's URL and publishable key. The key is public browser configuration; never put a service-role or secret key in the website.
+3. Open the website and create the two accounts. Confirm each account by email if confirmations are enabled. The database and private storage policies allow access only to those two listed emails. Users can remove only tracks they uploaded.
 
-The application uses Discord's public widget endpoint for the configured server, with visible loading and error states. It does not invent member data. It includes channel/member tabs, refresh, appearance settings stored in the browser, responsive layout and access to the original Discord widget.
+The SQL creates a private storage bucket, a track metadata table and row-level access policies. If you already use Supabase, review the script before running it; it creates namespaced `music_members`, `music_tracks` and `crazy-batto-music` resources.
 
-Open `index.html` from a static web host. The browser must be able to reach Discord's public widget endpoint for live data.
+## Files
+
+- `index.html`, `styles.css`, `app.mjs`, `discord-data.mjs`: Discord Lounge and responsive player UI.
+- `music-player.mjs`: local and shared playlist, authentication, uploads and playback.
+- `music-cloud-config.mjs`: public project URL and publishable key configuration.
+- `supabase/music-schema.sql`: database and private storage policies.
+- `ASSET_PROVENANCE.md`: original image transfer note.
+
+The project is static and has no build step. Deploy it to a static web host to use it. Updating this GitHub repository does not automatically publish the earlier Sites preview.
 
