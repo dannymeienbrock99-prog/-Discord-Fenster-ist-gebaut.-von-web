@@ -65,9 +65,16 @@
       <section class="music-room" aria-labelledby="musicTitle">
         <div class="music-heading">
           <div><p class="music-eyebrow">CRAZY_BATTO · MUSIC</p><h2 id="musicTitle">Eure Musik. Eure Lounge.</h2><p class="music-subtitle">Legt eigene Tracks in die Playlist und hört direkt im Browser.</p></div>
-          <label class="upload-button" for="musicFiles"><span aria-hidden="true">＋</span> Lieder hinzufügen</label>
+          <label class="upload-button" id="uploadMusicButton" for="musicFiles"><span aria-hidden="true">＋</span> Lieder hinzufügen</label>
           <input class="visually-hidden" id="musicFiles" type="file" accept="audio/*,.mp3,.m4a,.ogg,.wav" multiple>
         </div>
+        <form class="music-auth" id="musicAuth" hidden>
+          <label>E-Mail<input id="musicEmail" name="email" type="email" autocomplete="username" required placeholder="name@beispiel.de"></label>
+          <label>Passwort<input id="musicPassword" name="password" type="password" autocomplete="current-password" required minlength="8" placeholder="Mindestens 8 Zeichen"></label>
+          <div class="auth-actions"><button class="auth-submit" type="submit">Anmelden</button><button class="auth-signup" id="musicSignup" type="button">Konto erstellen</button><button class="auth-signout" id="musicSignout" type="button" hidden>Abmelden</button></div>
+          <span class="auth-user" id="musicAuthUser" aria-live="polite"></span>
+          <p class="auth-status" id="musicAuthStatus" role="status">Meldet euch an, um die gemeinsame Playlist zu öffnen.</p>
+        </form>
         <div class="music-layout">
           <div class="track-panel">
             <div class="track-panel-heading"><span>PLAYLIST</span><span id="trackCount">0 Titel</span></div>
